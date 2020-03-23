@@ -6,7 +6,7 @@
 ## Motivation
 感觉自己太菜了，每次要用一些基础模型的时候都去github去git clone，现在想利用业余时间通过比较主流的框架把这些基础模型实现一遍。
 
-## Requirements - 必要条件（环境，对所有项目，和所有子模块和库的描述。）
+## Requirements
 > python>3.6  
 > TenosorFlow > 1.12  
 > TenosorFlow > 2.0  
@@ -14,7 +14,7 @@
 
 
 ## Usage
-git clone -,-
+git clone https://github.com/KevinChen1994/nlp_basic_model.git
 
 
 ## Changelog 

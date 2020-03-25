@@ -3,3 +3,5 @@
 *.xml
 *.iml
 /.idea/workspace.xml
+MNIST_data/
+data/

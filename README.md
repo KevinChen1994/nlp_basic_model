@@ -8,12 +8,10 @@
 
 ## Requirements
 > python>3.6  
-> TenosorFlow > 1.12  
-
-
-## Usage
-git clone https://github.com/KevinChen1994/nlp_basic_model.git
+> TensorFlow > 1.12  
 
 
 ## Changelog 
+- lstmsingle
 
+实现单向LSTM用作分类任务。其中添加了TensorBoard，并且实现的参数相对比较灵活，可以进行调整，data_loader可以进行复用。

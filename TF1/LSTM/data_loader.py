@@ -69,6 +69,24 @@ def process_file(file_dir, word_to_id, cat_to_id, seq_length=128):
 
     return x_pad, y_pad
 
+# 返回值添加了序列长度
+def process_file_(file_dir, word_to_id, cat_to_id, seq_length=128):
+    contents, labels = read_corpus(file_dir)
+
+    data_id, label_id = [], []
+    for i in range(len(contents)):
+        data_id.append([word_to_id[x] for x in contents[i] if x in word_to_id])
+        label_id.append(cat_to_id[labels[i]])
+
+    # 使用keras提供的pad_sequences来将文本pad为固定长度
+    x_pad = kr.preprocessing.sequence.pad_sequences(data_id, seq_length)
+    y_pad = kr.utils.to_categorical(label_id, num_classes=len(cat_to_id))
+    seq_lens = np.zeros([len(data_id)], dtype=np.int)
+    for i in range(len(data_id)):
+        seq_lens[i] = min(len(data_id[i]), seq_length)
+
+    return x_pad, y_pad, seq_lens
+
 
 def batch_iter(x, y, batch_size=64):
     data_len = len(x)
@@ -84,6 +102,24 @@ def batch_iter(x, y, batch_size=64):
         start_id = i * batch_size
         end_id = min((i + 1) * batch_size, data_len)
         yield x_shuffle[start_id:end_id], y_shuffle[start_id:end_id]
+
+
+# 返回值添加了序列长度
+def batch_iter_(x, y, seq_lens, batch_size=64):
+    data_len = len(x)
+    num_batch = int((data_len - 1) / batch_size) + 1
+
+    # 生成一个随机排列的数组，不改变原矩阵的值
+    indices = np.random.permutation(np.arange(data_len))
+    # 这样处理的好处是让X和Y中的值依然保持原来的对应关系
+    x_shuffle = x[indices]
+    y_shuffle = y[indices]
+    len_shuffle = seq_lens[indices]
+
+    for i in range(num_batch):
+        start_id = i * batch_size
+        end_id = min((i + 1) * batch_size, data_len)
+        yield x_shuffle[start_id:end_id], y_shuffle[start_id:end_id], len_shuffle[start_id:end_id]
 
 
 if __name__ == '__main__':

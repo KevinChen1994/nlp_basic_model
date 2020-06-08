@@ -9,7 +9,7 @@ import sys
 import os
 import time
 from datetime import timedelta
-from TF1.LSTM.data_loader import read_corpus, read_vocab, read_labels, vocab_build, process_file, batch_iter
+from TF1.LSTM.data_loader import read_corpus, read_vocab, read_labels, vocab_build, process_file_, batch_iter_
 
 base_dir = '../../data/small_cnews'
 train_dir = os.path.join(base_dir, 'train.txt')
@@ -17,9 +17,9 @@ test_dir = os.path.join(base_dir, 'test.txt')
 val_dir = os.path.join(base_dir, 'val.txt')
 vocab_dir = os.path.join(base_dir, 'vocab.txt')
 label_dir = os.path.join(base_dir, 'label.txt')
-save_dir = 'checkpoints/lstm_single'
-save_path = os.path.join(save_dir, 'lstm_single')
-tensorboard_dir = 'tensorboard/lstm_single'
+save_dir = 'checkpoints/bi_lstm'
+save_path = os.path.join(save_dir, 'bi_lstm')
+tensorboard_dir = 'tensorboard/bi_lstm'
 
 
 def get_time_dif(start_time):
@@ -51,6 +51,7 @@ class model(object):
 
         self.label = tf.placeholder(tf.int32, [None, config.num_classes], name='label')
         self.content = tf.placeholder(tf.int32, [None, config.seq_length], name='content')
+        self.sequence_lengths = tf.placeholder(tf.int32, [None], name='sequence_lengths')
 
         self.lstm()
 
@@ -66,13 +67,17 @@ class model(object):
             self.embeddings_inputs = tf.nn.embedding_lookup(embedding, self.content)
 
         with tf.name_scope('lstm_layer'):
-            cell = tf.nn.rnn_cell.LSTMCell(self.config.num_units)
-            outputs, states = tf.nn.dynamic_rnn(cell, self.embeddings_inputs, dtype=tf.float32)
-            w = tf.get_variable(name='w', shape=[self.config.num_units, self.config.num_classes],
+            cell_fw = tf.nn.rnn_cell.LSTMCell(self.config.num_units)
+            cell_bw = tf.nn.rnn_cell.LSTMCell(self.config.num_units)
+            outputs, states = tf.nn.bidirectional_dynamic_rnn(cell_fw, cell_bw, self.embeddings_inputs,
+                                                              self.sequence_lengths, dtype=tf.float32)
+            w = tf.get_variable(name='w', shape=[2 * self.config.num_units, self.config.num_classes],
                                 initializer=tf.contrib.layers.xavier_initializer(), dtype=tf.float32)
             b = tf.get_variable(name='b', shape=[self.config.num_classes],
                                 initializer=tf.zeros_initializer(), dtype=tf.float32)
-            # outputs[batch_size, num_steps, num_units] -> [num_steps, batch_size, num_units]
+            # outputs[batch_size, num_steps, 2*num_units]
+            outputs = tf.concat(outputs, 2)
+            # outputs[batch_size, num_steps, 2*num_units] -> [num_steps, batch_size, 2*num_units]
             outputs = tf.transpose(outputs, [1, 0, 2])
             outputs = outputs[-1]
             fc = tf.matmul(outputs, w) + b
@@ -90,14 +95,14 @@ class model(object):
             self.accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 
 
-def evaluate(sess, x, y, batch_size):
+def evaluate(sess, x, y, seq_lens, batch_size):
     data_len = len(x)
-    batch_eval = batch_iter(x, y, batch_size)
+    batch_eval = batch_iter_(x, y, seq_lens, batch_size)
     total_loss = 0.0
     total_acc = 0.0
-    for x_batch, y_batch in batch_eval:
+    for x_batch, y_batch, seq_lens_batch in batch_eval:
         batch_len = len(x_batch)
-        feed_dict = {model.content: x_batch, model.label: y_batch}
+        feed_dict = {model.content: x_batch, model.label: y_batch, model.sequence_lengths: seq_lens_batch}
         loss, acc = sess.run([model.loss, model.accuracy], feed_dict=feed_dict)
         total_loss += loss * batch_len
         total_acc += acc * batch_len
@@ -120,8 +125,8 @@ def train():
     # 处理数据
     print('Loading training data and validation data...')
     start_time = time.time()
-    x_train, y_train = process_file(train_dir, word_to_id, label_to_id, config.seq_length)
-    x_val, y_val = process_file(val_dir, word_to_id, label_to_id, config.seq_length)
+    x_train, y_train, seq_lens_train = process_file_(train_dir, word_to_id, label_to_id, config.seq_length)
+    x_val, y_val, seq_lens_val = process_file_(val_dir, word_to_id, label_to_id, config.seq_length)
     print('Time usage:', get_time_dif(start_time))
 
     # 创建session
@@ -137,9 +142,9 @@ def train():
     total_batch = 0
 
     for epoch in range(config.epoch):
-        batch_train = batch_iter(x_train, y_train, config.batch_size)
-        for x_batch, y_batch in batch_train:
-            feed_dict = {model.content: x_batch, model.label: y_batch}
+        batch_train = batch_iter_(x_train, y_train, seq_lens_train, config.batch_size)
+        for x_batch, y_batch, seq_lens_batch in batch_train:
+            feed_dict = {model.content: x_batch, model.label: y_batch, model.sequence_lengths: seq_lens_batch}
 
             # 将训练结果写如到TensorBoard中
             if total_batch % config.save_pre_batch == 0:
@@ -149,7 +154,7 @@ def train():
             # 输出训练集和验证集的结果，并保存最好的模型
             if total_batch % config.print_pre_batch == 0:
                 loss_train, acc_train = session.run([model.loss, model.accuracy], feed_dict=feed_dict)
-                loss_val, acc_val = evaluate(session, x_val, y_val, config.batch_size)
+                loss_val, acc_val = evaluate(session, x_val, y_val, seq_lens_val, config.batch_size)
                 # 每次只保存最好的模型
                 if acc_val > best_acc_val:
                     best_acc_val = acc_val
@@ -168,7 +173,7 @@ def train():
 
 def test():
     print('Loading test data...')
-    x_test, y_test = process_file(test_dir, word_to_id, label_to_id, config.seq_length)
+    x_test, y_test, seq_lens_test = process_file_(test_dir, word_to_id, label_to_id, config.seq_length)
     content_test, label_test = read_corpus(test_dir)
 
     session = tf.Session()
@@ -178,7 +183,7 @@ def test():
     saver.restore(sess=session, save_path=save_path)
 
     print('Start testing...')
-    loss_test, acc_test = evaluate(session, x_test, y_test, config.batch_size)
+    loss_test, acc_test = evaluate(session, x_test, y_test, seq_lens_test, config.batch_size)
     msg = 'Test Loss: {0:>2.2f}, Test Acc: {1:>2.2%}'
     print(msg.format(loss_test, acc_test))
 
@@ -188,7 +193,8 @@ def test():
     for i in range(num_batch):
         start = i * config.batch_size
         end = min(data_len, start + config.batch_size)
-        feed_dict = {model.content: x_test[start:end], model.label: y_test[start:end]}
+        feed_dict = {model.content: x_test[start:end], model.label: y_test[start:end],
+                     model.sequence_lengths: seq_lens_test[start:end]}
         predict_result[start:end] = session.run(model.predict_label, feed_dict=feed_dict)
 
     print('Writing predict result to predict.txt...')

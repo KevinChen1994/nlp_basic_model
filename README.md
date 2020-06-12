@@ -14,6 +14,7 @@
 为了快速训练，使用data_helper.py将数据集进行切分，只使用一小部分数据进行训练。
 
 ## Changelog 
+### LSTM
 - 单层LSTM（LSTM/lstm_single.py）
 
 实现单向LSTM用作分类任务。其中添加了TensorBoard，并且实现的参数相对比较灵活，可以进行调整，data_loader可以进行复用。
@@ -33,3 +34,17 @@
 在众多“教程”中，实现的方法一般都是使用tf.nn.bidirectional_dynamic_rnn，在这之前将正向和反向LSTM进行堆叠，然后放入到双向LSTM中。直到我看到https://blog.csdn.net/u012436149/article/details/71080601
 这篇文章，看到这个博主自己实现的堆叠多层双向LSTM直呼高手，并一直用这个博主实现的API，后来发现TensorFlow官方自己实现了这个API，tf.contrib.rnn.stack_bidirectional_dynamic_rnn，API的介绍在http://tensorflow.biotecan.com/python/Python_1.8/tensorflow.google.cn/api_docs/python/tf/contrib/rnn/stack_bidirectional_dynamic_rnn.html，
 具体可以看https://stackoverflow.com/questions/49242266/difference-between-bidirectional-dynamic-rnn-and-stack-bidirectional-dynamic-rnn的讨论，上边的图也是来自这个讨论帖，说的很清楚。
+
+### textCNN
+
+- 一种尺寸的卷积核的CNN（CNN/textcnn）
+
+只有一种尺寸的卷积核，用作文本分类任务。数据处理复用的LSTM的程序。
+
+- 多种尺寸的卷积核的CNN（CNN/multi_kernel_size_textcnn）
+
+多种尺寸的卷积核的CNN
+
+### seq2seq
+
+实现在 https://github.com/KevinChen1994/seq2seq_learning

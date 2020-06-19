@@ -39,6 +39,8 @@ class CNNConfig(object):
     embedding_dim = 100
     dropout_prob = 0.5
     learning_rate = 1e-3
+    decay_rate = 0.1  # 学习率衰减比率
+    decay_steps = 2000  # 衰减步数
     batch_size = 128
     epoch = 20
 
@@ -113,7 +115,14 @@ class model(object):
             self.loss = tf.reduce_mean(
                 tf.nn.softmax_cross_entropy_with_logits_v2(logits=self.logtis, labels=self.label))
 
-            self.optimizer = tf.train.AdamOptimizer(self.config.learning_rate).minimize(self.loss)
+            # 动态学习率，随着训练步数进行衰减
+            global_step = tf.Variable(0)
+            self.dynamic_learning_rate = tf.train.exponential_decay(learning_rate=self.config.learning_rate,
+                                                                    global_step=global_step,
+                                                                    decay_rate=self.config.decay_rate,
+                                                                    decay_steps=self.config.decay_steps)
+
+            self.optimizer = tf.train.AdamOptimizer(self.dynamic_learning_rate).minimize(self.loss)
 
         with tf.name_scope('score'):
             self.predict_label = tf.argmax(self.logtis, 1)

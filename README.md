@@ -48,3 +48,8 @@
 ### seq2seq
 
 实现在 https://github.com/KevinChen1994/seq2seq_learning
+
+### NER
+
+实现了比较灵活的模型，可以设置是够使用LSTM和CRF，另外BERT和CRF的学习率也是可以单独进行设置的，经过试验，BERT的学习率与CRF的学习率比为1：100效果是最好的。
+试验数据是人民日报的的NER数据，地址在 https://pan.baidu.com/s/1LDwQjoj7qc-HT9qwhJ3rcA password: 1fa3。试验用的十分之一的数据，在/data/small_ner中。

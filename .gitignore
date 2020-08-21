@@ -4,5 +4,9 @@
 *.iml
 .idea
 cnews
+人民日报2014NER数据
 checkpoints
 tensorboard
+output
+test
+bert_ckpt

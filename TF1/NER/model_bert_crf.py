@@ -76,6 +76,15 @@ class ModelBertCRF(object):
 
         self.loss = tf.reduce_mean(loss)
 
+        '''
+        其实将不同的参数使用不同的学习率进行训练就是将optimizer.minimize(loss, varlist)拆分开来写。
+        先来看一下minimize的源码：先进行compute_gradients()，然后进行apply_gradients().
+        也就是先计算梯度，然后使用梯度来更新参数。
+        那么应用到不同的参数使用不同的学习也是一样的流程：先取到不同的参数集合，然后使用loss和不同的参数集合
+        计算不同的参数的梯度，最后使用不同的梯度来更新不同的参数。其中为了防止梯度爆炸和梯度消失对梯度进行了
+        剪切，让参数的更新限制在一个合适的范围内。
+        https://cloud.tencent.com/developer/article/1375874
+        '''
         with tf.variable_scope('opt'):
             params_of_bert = []
             params_of_others = []
@@ -87,10 +96,14 @@ class ModelBertCRF(object):
                     params_of_others.append(var)
             opt_bert = tf.train.AdamOptimizer(learning_rate_bert)
             opt_others = tf.train.AdamOptimizer(learning_rate_crf)
+            # 计算梯度
             gradients_bert = tf.gradients(self.loss, params_of_bert)
             gradients_others = tf.gradients(self.loss, params_of_others)
+            # 为了防止梯度爆炸或者梯度消失，对梯度进行剪切。让参数的更新限制在一个合适的范围。
+            # https://blog.csdn.net/u013713117/article/details/56281715
             gradients_bert_clipped, norm_bert = tf.clip_by_global_norm(gradients_bert, 5.0)
             gradients_others_clipped, norm_others = tf.clip_by_global_norm(gradients_others, 5.0)
+            # 更新参数
             train_op_bert = opt_bert.apply_gradients(zip(gradients_bert_clipped, params_of_bert))
             train_op_others = opt_others.apply_gradients(zip(gradients_others_clipped, params_of_others))
 

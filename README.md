@@ -49,7 +49,13 @@
 
 实现在 https://github.com/KevinChen1994/seq2seq_learning
 
-### NER
+### BERT NER
 
 实现了比较灵活的模型，可以设置是够使用LSTM和CRF，另外BERT和CRF的学习率也是可以单独进行设置的，经过试验，BERT的学习率与CRF的学习率比为1：100效果是最好的。
 试验数据是人民日报的的NER数据，地址在 https://pan.baidu.com/s/1LDwQjoj7qc-HT9qwhJ3rcA password: 1fa3。试验用的十分之一的数据，在/data/small_ner中。
+
+### BERT multi label classification
+
+数据：Amazon商品详情与评论 https://github.com/SophonPlus/ChineseNlpCorpus/blob/master/datasets/yf_amazon/intro.ipynb
+模型是很简答的，直接拿出bert的输出然后接一个全连接，计算sigmoid即可，需要注意的是bert的输出要使用get_pooled_output()，维度是[batch_size, hidden_size]，
+在NER任务使用的是get_sequence_output()，维度是[batch_size, seq_length, hidden_size]，get_pooled_output()将维度压缩了。

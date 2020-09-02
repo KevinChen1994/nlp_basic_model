@@ -4,6 +4,8 @@
 *.iml
 .idea
 cnews
+data/amazon/links.csv
+data/amazon/ratings.csv
 人民日报2014NER数据
 checkpoints
 tensorboard

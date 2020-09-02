@@ -57,5 +57,5 @@
 ### BERT multi label classification
 
 数据：Amazon商品详情与评论 https://github.com/SophonPlus/ChineseNlpCorpus/blob/master/datasets/yf_amazon/intro.ipynb
-模型是很简答的，直接拿出bert的输出然后接一个全连接，计算sigmoid即可，需要注意的是bert的输出要使用get_pooled_output()，维度是[batch_size, hidden_size]，
+模型是很简单的，直接拿出bert的输出然后接一个全连接，计算sigmoid即可，需要注意的是bert的输出要使用get_pooled_output()，维度是[batch_size, hidden_size]，
 在NER任务使用的是get_sequence_output()，维度是[batch_size, seq_length, hidden_size]，get_pooled_output()将维度压缩了。

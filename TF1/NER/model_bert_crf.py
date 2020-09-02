@@ -17,12 +17,12 @@ class ModelBertCRF(object):
                  max_seq_len,
                  learning_rate_bert,
                  learning_rate_crf):
-        self.inputs_seq = tf.placeholder(dtype=tf.int32, shape=[None, None], name='inputs_seq')
-        self.inputs_mask = tf.placeholder(dtype=tf.int32, shape=[None, None], name='inputs_mask')
-        self.inputs_segment = tf.placeholder(dtype=tf.int32, shape=[None, None], name='inputs_segment')
-        self.outputs_seq = tf.placeholder(dtype=tf.int32, shape=[None, None], name='outputs_seq')
+        self.inputs_seq = tf.placeholder(dtype=tf.int32, shape=[None, None], name='inputs_seq') # batch_size * (sequence_len + 2)
+        self.inputs_mask = tf.placeholder(dtype=tf.int32, shape=[None, None], name='inputs_mask') # batch_size * (sequence_len + 2)
+        self.inputs_segment = tf.placeholder(dtype=tf.int32, shape=[None, None], name='inputs_segment') # batch_size * (sequence_len + 2)
+        self.outputs_seq = tf.placeholder(dtype=tf.int32, shape=[None, None], name='outputs_seq') # batch_size * (sequence_len + 2)
 
-        inputs_seq_len = tf.reduce_sum(self.inputs_mask, axis=-1)
+        inputs_seq_len = tf.reduce_sum(self.inputs_mask, axis=-1) # batch_size
 
         bert_model = modeling.BertModel(
             config=bert_config,
@@ -33,7 +33,7 @@ class ModelBertCRF(object):
             use_one_hot_embeddings=False
         )
 
-        bert_outputs = bert_model.get_sequence_output()
+        bert_outputs = bert_model.get_sequence_output() # batch_size * (sequence_len + 2) * dim
 
         if not use_lstm:
             hiddens = bert_outputs
@@ -49,15 +49,15 @@ class ModelBertCRF(object):
                     sequence_length=inputs_seq_len,
                     dtype=tf.float32
                 )
-                rnn_outputs = tf.add(rnn_fw_outputs, rnn_bw_outputs)
+                rnn_outputs = tf.add(rnn_fw_outputs, rnn_bw_outputs) # batch_size * (sequence_len + 2) * dim
             hiddens = rnn_outputs
 
         with tf.variable_scope('projection'):
-            logits_seq = tf.layers.dense(hiddens, vocab_size_bio)
+            logits_seq = tf.layers.dense(hiddens, vocab_size_bio) # batch_size * (sequence_len + 2) * vocab_size
             probs_seq = tf.nn.softmax(logits_seq)
 
             if not use_crf:
-                preds_seq = tf.argmax(probs_seq, axis=-1, name='preds_seq')
+                preds_seq = tf.argmax(probs_seq, axis=-1, name='preds_seq') # batch_size * vocab_size
             else:
                 log_likelihood, transition_matrix = tf.contrib.crf.crf_log_likelihood(logits_seq, self.outputs_seq,
                                                                                       inputs_seq_len)
@@ -67,10 +67,10 @@ class ModelBertCRF(object):
 
         with tf.variable_scope('loss'):
             if not use_crf:
-                loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits_seq, labels=self.outputs_seq)
+                loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits_seq, labels=self.outputs_seq) # batch_size * (sequence_len + 2)
                 # tf.sequence_mask(),默认最大长度为输入的tensor中的最大长度，因为我们自己设定了最大长度，这里需要传一个参数，并且加上了[SEQ][CLS]所以需要+2
-                masks = tf.sequence_mask(inputs_seq_len, maxlen=max_seq_len + 2, dtype=tf.float32)
-                loss = tf.reduce_sum(loss * masks, axis=-1) / tf.cast(inputs_seq_len, tf.float32)
+                masks = tf.sequence_mask(inputs_seq_len, maxlen=max_seq_len + 2, dtype=tf.float32) # batch_size * (sequence_len + 2)
+                loss = tf.reduce_sum(loss * masks, axis=-1) / tf.cast(inputs_seq_len, tf.float32) # batch_size
             else:
                 loss = -log_likelihood / tf.cast(inputs_seq_len, tf.float32)
 

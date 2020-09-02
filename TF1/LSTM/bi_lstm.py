@@ -142,7 +142,7 @@ def train():
     total_batch = 0
 
     for epoch in range(config.epoch):
-        batch_train = batch_iter_(x_train, y_train, seq_lens_train, config.batch_size)
+        batch_train = batch_iter(x_train, y_train, seq_lens_train, config.batch_size)
         for x_batch, y_batch, seq_lens_batch in batch_train:
             feed_dict = {model.content: x_batch, model.label: y_batch, model.sequence_lengths: seq_lens_batch}
 

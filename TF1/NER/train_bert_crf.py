@@ -95,6 +95,7 @@ def train():
                          max_seq_len=args.max_sequence_len,
                          learning_rate_bert=args.learning_rate_bert, learning_rate_crf=args.learning_rate_crf)
 
+    # 打印模型参数
     logger.info("model params:")
     params_num_all = 0
     for variable in tf.trainable_variables():
@@ -107,7 +108,9 @@ def train():
 
     logger.info('loading bert pretrained parameters...')
 
+    # 获取模型中全部的训练参数
     tvars = tf.trainable_variables()
+    # 加载BERT模型
     (assignment_map, initialized_variable_names) = modeling.get_assignment_map_from_checkpoint(tvars,
                                                                                                args.bert_ckpt_path)
     tf.train.init_from_checkpoint(args.bert_ckpt_path, assignment_map)
@@ -157,7 +160,7 @@ def train():
                     s = session.run(merged_summary, feed_dict=feed_dict)
                     writer.add_summary(s, batches)
 
-                    # 在验证集进行验证，并保存FB1最高的模型
+                    # 在验证集进行验证
                     valid(model, session, seq_id_val, label_id_val, input_mask_val, input_segment_val, epoch)
                     ckpt_save_path = os.path.join(ckpt_path, 'model.ckpt')
                     logger.info('path of ckpt: {}-{}'.format(ckpt_save_path, batches))
@@ -229,3 +232,5 @@ if __name__ == '__main__':
         train()
     elif args.mode == 'test':
         test()
+    else:
+        logger.info('Please input the right mode: train/test')

@@ -80,9 +80,9 @@ w2i_label, i2w_label = read_labels(os.path.join(args.data_path, 'categories.csv'
 def train():
     logger.info('loading data...')
     seq_id_train, label_train, input_mask_train, input_segment_train = data_process(
-        os.path.join(args.data_path, 'dev.txt'), w2i_char, w2i_label, args.max_sequence_len)
+        os.path.join(args.data_path, 'train.txt'), w2i_char, w2i_label, args.max_sequence_len)
     seq_id_val, label_val, input_mask_val, input_segment_val = data_process(
-        os.path.join(args.data_path, 'test.txt'), w2i_char, w2i_label, args.max_sequence_len)
+        os.path.join(args.data_path, 'dev.txt'), w2i_char, w2i_label, args.max_sequence_len)
 
     logger.info('building model...')
     bert_config = modeling.BertConfig.from_json_file(args.bert_config_path)

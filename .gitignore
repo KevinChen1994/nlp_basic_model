@@ -6,6 +6,8 @@
 cnews
 data/amazon/links.csv
 data/amazon/ratings.csv
+data/amazon/categories.csv
+data/amazon/products.csv
 人民日报2014NER数据
 checkpoints
 tensorboard

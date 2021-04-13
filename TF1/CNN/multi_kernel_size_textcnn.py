@@ -109,11 +109,11 @@ class model(object):
             b = tf.get_variable(name='b', shape=[self.config.num_classes],
                                 initializer=tf.zeros_initializer(), dtype=tf.float32)
             fc = tf.matmul(h, w) + b
-            self.logtis = tf.nn.dropout(fc, self.config.dropout_prob)
+            self.logits = tf.nn.dropout(fc, self.config.dropout_prob)
 
         with tf.name_scope('optimize_layer'):
             self.loss = tf.reduce_mean(
-                tf.nn.softmax_cross_entropy_with_logits_v2(logits=self.logtis, labels=self.label))
+                tf.nn.softmax_cross_entropy_with_logits_v2(logits=self.logits, labels=self.label))
 
             # 动态学习率，随着训练步数进行衰减
             global_step = tf.Variable(0)
@@ -125,8 +125,8 @@ class model(object):
             self.optimizer = tf.train.AdamOptimizer(self.dynamic_learning_rate).minimize(self.loss)
 
         with tf.name_scope('score'):
-            self.predict_label = tf.argmax(self.logtis, 1)
-            correct_pred = tf.equal(tf.argmax(self.logtis, 1), tf.argmax(self.label, 1))
+            self.predict_label = tf.argmax(self.logits, 1)
+            correct_pred = tf.equal(tf.argmax(self.logits, 1), tf.argmax(self.label, 1))
             self.accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 
 

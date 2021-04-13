@@ -1,66 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2b3468f5-0c03-4279-aaf8-6a7ad97244cd" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="2b3468f5-0c03-4279-aaf8-6a7ad97244cd" name="Default Changelist" comment="BERT+LSTM+CRF for NER 添加注释">
+      <change afterPath="$PROJECT_DIR$/TF1/mlp_numpy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TF1/word2vec/skip_gram.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cal_f1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/nlp_basic_model.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/nlp_basic_model.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TF1/CNN/multi_kernel_size_textcnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/TF1/CNN/multi_kernel_size_textcnn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TF1/bert_multi_label/model_bert_multi_label.py" beforeDir="false" afterPath="$PROJECT_DIR$/TF1/bert_multi_label/model_bert_multi_label.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TF1/bert_multi_label/train_bert_multi_label.py" beforeDir="false" afterPath="$PROJECT_DIR$/TF1/bert_multi_label/train_bert_multi_label.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-855334996">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Markdown" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Markdown" value="266" />
-        </counts>
-      </usages-collector>
-    </session>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/nlp_basic_model$data_helper.coverage" NAME="data_helper Coverage Results" MODIFIED="1585130224787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$logistic_regression.coverage" NAME="logistic_regression Coverage Results" MODIFIED="1585127570847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$linear_regression.coverage" NAME="linear_regression Coverage Results" MODIFIED="1585120839988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1" />
   </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="342">
-                <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
       <list>
-        <option value="$PROJECT_DIR$/README.md" />
+        <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JupyterTrust" id="4a93d543-0494-4df8-9ded-ce3bfd655419" />
+  <component name="ProjectId" id="1cYwfJCO9IllRCcUYquEpA1ZtBw" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -77,43 +61,167 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="nlp_basic_model" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nlp_basic_model" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/test/danmu.py&#10;/Users/chenmeng/PycharmProjects/nlp_basic_model/data/small_cnews/test.txt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data/amazon" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/fastapi_demo" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/amazon" />
+      <recent name="$PROJECT_DIR$/TF1/NER/output/1597979542/results" />
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/TF1/NER" />
+      <recent name="$PROJECT_DIR$/bert_ckpt" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.mlp_numpy">
+    <configuration name="bi_lstm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="nlp_basic_model" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TF1/LSTM" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TF1/LSTM/bi_lstm.py" />
+      <option name="PARAMETERS" value="train" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="cal_f1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="nlp_basic_model" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/cal_f1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="linear_regression" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="nlp_basic_model" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TF1" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TF1/linear_regression.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mlp_numpy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="nlp_basic_model" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TF1" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TF1/mlp_numpy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_bert_multi_label" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="nlp_basic_model" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="CUDA_VISIBLE_DEVICES" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TF1/bert_multi_label" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TF1/bert_multi_label/train_bert_multi_label.py" />
+      <option name="PARAMETERS" value="--mode=test --model_name=1599038908" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.cal_f1" />
+      <item itemvalue="Python.train_bert_multi_label" />
+      <item itemvalue="Python.bi_lstm" />
+      <item itemvalue="Python.linear_regression" />
+      <item itemvalue="Python.mlp_numpy" />
+    </list>
+    <recent_temporary>
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <item itemvalue="Python.mlp_numpy" />
+        <item itemvalue="Python.linear_regression" />
+        <item itemvalue="Python.bi_lstm" />
+        <item itemvalue="Python.cal_f1" />
+        <item itemvalue="Python.train_bert_multi_label" />
       </list>
-    </option>
+    </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
   </component>
@@ -124,54 +232,345 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1584955505998</updated>
+      <workItem from="1590718939492" duration="15279000" />
+      <workItem from="1590807416309" duration="189000" />
+      <workItem from="1590847376704" duration="13000" />
+      <workItem from="1590847644031" duration="26529000" />
+      <workItem from="1591346688800" duration="2808000" />
+      <workItem from="1591526539060" duration="295000" />
+      <workItem from="1591580545297" duration="12603000" />
+      <workItem from="1591713149914" duration="8436000" />
+      <workItem from="1591864096232" duration="4649000" />
+      <workItem from="1592362829573" duration="284000" />
+      <workItem from="1592363374303" duration="13340000" />
+      <workItem from="1592880620597" duration="4260000" />
+      <workItem from="1592987205534" duration="6927000" />
+      <workItem from="1593412157812" duration="902000" />
+      <workItem from="1593875418026" duration="410000" />
+      <workItem from="1593876691577" duration="968000" />
+      <workItem from="1597130932448" duration="7401000" />
+      <workItem from="1597516502906" duration="23375000" />
+      <workItem from="1597975824714" duration="12678000" />
+      <workItem from="1598110186891" duration="5488000" />
+      <workItem from="1598337546610" duration="9502000" />
+      <workItem from="1598492298753" duration="51906000" />
+      <workItem from="1599198600635" duration="2442000" />
+      <workItem from="1599474803678" duration="4118000" />
+      <workItem from="1600065144561" duration="23534000" />
+      <workItem from="1600655350274" duration="3074000" />
+      <workItem from="1600852204524" duration="1404000" />
+      <workItem from="1604373651195" duration="97000" />
+      <workItem from="1605072552936" duration="8645000" />
+      <workItem from="1605249555596" duration="3978000" />
+      <workItem from="1605259245843" duration="1322000" />
+      <workItem from="1605295185006" duration="464000" />
+      <workItem from="1605340860695" duration="474000" />
+      <workItem from="1605492068859" duration="588000" />
+      <workItem from="1605495245096" duration="186000" />
+      <workItem from="1605496173106" duration="247000" />
+      <workItem from="1605496462708" duration="19000" />
+      <workItem from="1605496512407" duration="71000" />
+      <workItem from="1605496647285" duration="7064000" />
+      <workItem from="1605773144596" duration="4130000" />
+      <workItem from="1606298765006" duration="415000" />
+      <workItem from="1606484004177" duration="253000" />
+      <workItem from="1606484583108" duration="1042000" />
+      <workItem from="1606716323937" duration="4464000" />
+      <workItem from="1606799609040" duration="805000" />
+      <workItem from="1606999847470" duration="380000" />
+      <workItem from="1607000427205" duration="479000" />
+      <workItem from="1607001288458" duration="497000" />
+      <workItem from="1607046220017" duration="5231000" />
+      <workItem from="1607491886691" duration="526000" />
+      <workItem from="1608346479378" duration="1184000" />
+      <workItem from="1608536107788" duration="438000" />
+      <workItem from="1609379282999" duration="893000" />
+      <workItem from="1609903465520" duration="576000" />
+      <workItem from="1609912953373" duration="1248000" />
+      <workItem from="1610029278058" duration="352000" />
+      <workItem from="1610029656408" duration="809000" />
+      <workItem from="1610432515139" duration="2027000" />
+      <workItem from="1610678422524" duration="186000" />
+      <workItem from="1611046525944" duration="3879000" />
+      <workItem from="1611641622343" duration="1144000" />
+      <workItem from="1611726804672" duration="4142000" />
+      <workItem from="1612356693259" duration="514000" />
+      <workItem from="1612450685626" duration="14000" />
+      <workItem from="1614650864449" duration="656000" />
+      <workItem from="1616036045691" duration="2768000" />
+      <workItem from="1616575054335" duration="1084000" />
     </task>
+    <task id="LOCAL-00001" summary="update">
+      <created>1584958590331</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1584958590331</updated>
+    </task>
+    <task id="LOCAL-00002" summary="update">
+      <created>1584958886339</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1584958886339</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update">
+      <created>1585130318187</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1585130318187</updated>
+    </task>
+    <task id="LOCAL-00004" summary="lstm_single">
+      <created>1591151657106</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1591151657107</updated>
+    </task>
+    <task id="LOCAL-00005" summary="lstm_single">
+      <created>1591152877438</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1591152877438</updated>
+    </task>
+    <task id="LOCAL-00006" summary="lstm_single">
+      <created>1591585194896</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1591585194896</updated>
+    </task>
+    <task id="LOCAL-00007" summary="lstm">
+      <created>1591603854619</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1591603854619</updated>
+    </task>
+    <task id="LOCAL-00008" summary="CNN">
+      <created>1591930605726</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1591930605726</updated>
+    </task>
+    <task id="LOCAL-00009" summary="添加自动衰减学习率">
+      <created>1592558973534</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1592558973534</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fastapi demo">
+      <created>1597759628274</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1597759628275</updated>
+    </task>
+    <task id="LOCAL-00011" summary="BERT+LSTM+CRF for NER">
+      <created>1597998410583</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1597998410583</updated>
+    </task>
+    <task id="LOCAL-00012" summary="BERT+LSTM+CRF for NER">
+      <created>1597998878228</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1597998878228</updated>
+    </task>
+    <task id="LOCAL-00013" summary="BERT+LSTM+CRF for NER 添加注释">
+      <created>1598427431535</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1598427431535</updated>
+    </task>
+    <task id="LOCAL-00014" summary="update">
+      <created>1599041337739</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1599041337739</updated>
+    </task>
+    <task id="LOCAL-00015" summary="BERT多标签分类">
+      <created>1599041374391</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1599041374391</updated>
+    </task>
+    <task id="LOCAL-00016" summary="update">
+      <created>1599041818717</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1599041818717</updated>
+    </task>
+    <task id="LOCAL-00017" summary="update">
+      <created>1599042417740</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1599042417741</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Remote Host" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="aiXcoder" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="342">
-            <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="lstm_single" />
+    <MESSAGE value="lstm" />
+    <MESSAGE value="CNN" />
+    <MESSAGE value="添加自动衰减学习率" />
+    <MESSAGE value="fastapi demo" />
+    <MESSAGE value="BERT+LSTM+CRF for NER" />
+    <MESSAGE value="BERT+LSTM+CRF for NER 添加注释" />
+    <MESSAGE value="BERT多标签分类" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="180" y="116" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611223558238">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="180" y="116" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1611223558238" />
+    <state x="423" y="105" key="#xdebugger.evaluate" timestamp="1616049478854">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="423" y="105" key="#xdebugger.evaluate/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616049478854" />
+    <state x="423" y="105" key="#xdebugger.evaluate/0.0.1440.900@0.0.1440.900" timestamp="1611223594695" />
+    <state width="1440" height="546" key="DebuggerActiveHint" timestamp="1616049472058">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1440" height="546" key="DebuggerActiveHint/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616049472058" />
+    <state width="1388" height="406" key="GridCell.Tab.0.bottom" timestamp="1616575011154">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1868" height="391" key="GridCell.Tab.0.bottom/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1612344576936" />
+    <state width="1388" height="406" key="GridCell.Tab.0.bottom/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616575011154" />
+    <state width="1388" height="312" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1611223614545" />
+    <state width="1388" height="406" key="GridCell.Tab.0.center" timestamp="1616575011151">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1868" height="391" key="GridCell.Tab.0.center/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1612344576933" />
+    <state width="1388" height="406" key="GridCell.Tab.0.center/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616575011151" />
+    <state width="1388" height="312" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1611223614544" />
+    <state width="1388" height="406" key="GridCell.Tab.0.left" timestamp="1616575011150">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1868" height="391" key="GridCell.Tab.0.left/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1612344576932" />
+    <state width="1388" height="406" key="GridCell.Tab.0.left/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616575011150" />
+    <state width="1388" height="312" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1611223614543" />
+    <state width="1388" height="406" key="GridCell.Tab.0.right" timestamp="1616575011152">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1868" height="391" key="GridCell.Tab.0.right/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1612344576934" />
+    <state width="1388" height="406" key="GridCell.Tab.0.right/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616575011152" />
+    <state width="1388" height="312" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1611223614544" />
+    <state width="1388" height="406" key="GridCell.Tab.1.bottom" timestamp="1616575011159">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1388" height="406" key="GridCell.Tab.1.bottom/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616575011159" />
+    <state width="1388" height="312" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1611223614548" />
+    <state width="1388" height="406" key="GridCell.Tab.1.center" timestamp="1616575011156">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1388" height="406" key="GridCell.Tab.1.center/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616575011156" />
+    <state width="1388" height="312" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1611223614546" />
+    <state width="1388" height="406" key="GridCell.Tab.1.left" timestamp="1616575011155">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1388" height="406" key="GridCell.Tab.1.left/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616575011155" />
+    <state width="1388" height="312" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1611223614546" />
+    <state width="1388" height="406" key="GridCell.Tab.1.right" timestamp="1616575011158">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1388" height="406" key="GridCell.Tab.1.right/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616575011158" />
+    <state width="1388" height="312" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1611223614547" />
+    <state x="0" y="0" width="1201" height="900" key="SettingsEditor" timestamp="1616036069340">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="0" y="0" width="1201" height="900" key="SettingsEditor/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1616036069340" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TF1/logistic_regression.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TF1/LSTM/data_loader.py</url>
+          <line>84</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TF1/NER/output/1597979542/results/test.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TF1/LSTM/bi_lstm.py</url>
+          <line>81</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/nlp_basic_model$train_bert_crf.coverage" NAME="train_bert_crf Coverage Results" MODIFIED="1597997423212" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/NER" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$textcnn.coverage" NAME="textcnn Coverage Results" MODIFIED="1591770187238" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/CNN" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$linear_regression.coverage" NAME="linear_regression Coverage Results" MODIFIED="1612344576525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$train_bert_multi_label.coverage" NAME="train_bert_multi_label Coverage Results" MODIFIED="1599040897135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/bert_multi_label" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$test.coverage" NAME="test Coverage Results" MODIFIED="1597994299748" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/NER/output/1597979542/results" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$data_helper__1_.coverage" NAME="data_helper (1) Coverage Results" MODIFIED="1598944274890" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/bert_multi_label" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$cal_f1.coverage" NAME="cal_f1 Coverage Results" MODIFIED="1605600427428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$data_helper.coverage" NAME="data_helper Coverage Results" MODIFIED="1597994443576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$data_loader.coverage" NAME="data_loader Coverage Results" MODIFIED="1591110331687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/LSTM" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$danmu.coverage" NAME="danmu Coverage Results" MODIFIED="1598110283045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$data.coverage" NAME="data Coverage Results" MODIFIED="1590742830245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/LSTM" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$flask_test.coverage" NAME="flask_test Coverage Results" MODIFIED="1598260301868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/fastapi_demo" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$skip_gram.coverage" NAME="skip_gram Coverage Results" MODIFIED="1593314792802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/word2vec" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$fastapi_demo.coverage" NAME="fastapi_demo Coverage Results" MODIFIED="1598593312752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/fastapi_demo" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$multi_kernel_size_textcnn.coverage" NAME="multi_kernel_size_textcnn Coverage Results" MODIFIED="1592554601683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/CNN" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$bi_lstm.coverage" NAME="bi_lstm Coverage Results" MODIFIED="1611223560242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/LSTM" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$mlp_numpy.coverage" NAME="mlp_numpy Coverage Results" MODIFIED="1616049447012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$async_test.coverage" NAME="async_test Coverage Results" MODIFIED="1597741959486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/fastapi_demo" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$lstm_single.coverage" NAME="lstm_single Coverage Results" MODIFIED="1591595782109" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/LSTM" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$utils.coverage" NAME="utils Coverage Results" MODIFIED="1597978383673" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/NER" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$threading_test.coverage" NAME="threading_test Coverage Results" MODIFIED="1597845301292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/nlp_basic_model$multi_layer_lstm.coverage" NAME="multi_layer_lstm Coverage Results" MODIFIED="1591603516635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TF1/LSTM" />
   </component>
   <component name="masterDetails">
     <states>

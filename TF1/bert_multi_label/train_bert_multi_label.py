@@ -3,19 +3,18 @@
 # author:chenmeng
 # datetime:2020/8/31 15:05
 import argparse
-import tensorflow as tf
-import numpy as np
-import os
 import logging
+import os
 import time
-from tqdm import tqdm
 
-from bert import modeling
-from TF1.bert_multi_label.model_bert_multi_label import Model
+import tensorflow as tf
+
+from TF1.bert_multi_label.data_helper import batch_iter
+from TF1.bert_multi_label.data_helper import data_process
 from TF1.bert_multi_label.data_helper import load_vocabulary
 from TF1.bert_multi_label.data_helper import read_labels
-from TF1.bert_multi_label.data_helper import data_process
-from TF1.bert_multi_label.data_helper import batch_iter
+from TF1.bert_multi_label.model_bert_multi_label import Model
+from bert import modeling
 
 ## hyperparameters
 parser = argparse.ArgumentParser(description='bert-multi-label')
@@ -140,7 +139,7 @@ def train():
                     logger.info('epoch: {}'.format(epoch))
                     logger.info('batch: {}'.format(batches))
                     logger.info('loss: {}'.format(sum(losses) / len(losses)))
-                    logger.ingo('time: {{'.format(time.time() - time_epoch_start))
+                    logger.info('time: {}'.format(time.time() - time_epoch_start))
                     time_epoch_start = time.time()
                     losses = []
 
@@ -173,9 +172,9 @@ def valid(model, sess, seq_id_val, label_val, input_mask_val, input_segment_val)
         feed_dict = {model.inputs_seq: inputs_seq_batch, model.label: label_batch,
                      model.inputs_mask: input_mask_batch, model.inputs_segment: input_segment_batch}
         predict_label_prob_batch = sess.run(model.probabilities, feed_dict=feed_dict)
-        for i in range(len(predict_label_prob_batch)):
-            predict_label.append([i for i, prob in enumerate(predict_label_prob_batch[i]) if prob > 0.5])
-            real_label.append([i for i, prob in enumerate(label_batch[i]) if prob == 1])
+        for j in range(len(predict_label_prob_batch)):
+            predict_label.append([_ for _, prob in enumerate(predict_label_prob_batch[j]) if prob > 0.5])
+            real_label.append([_ for _, prob in enumerate(label_batch[j]) if prob == 1])
 
         for predict_label_, real_label_ in zip(predict_label, real_label):
             p_sum += len(predict_label_)
@@ -190,6 +189,7 @@ def valid(model, sess, seq_id_val, label_val, input_mask_val, input_segment_val)
     logger.info('Recall:{}%'.format(r))
     logger.info('F1:{}%'.format(f1))
     logger.info('Validate takes {} s'.format(time.time() - time_valid))
+
 
 def test():
     time_test = time.time()
@@ -221,21 +221,21 @@ def test():
 
         logger.info('start testing ...')
 
-        batch_train = batch_iter(seq_id_test, label_test, input_mask_test, input_segment_test, args.batch_size)
-        for i, (inputs_seq_batch, label_batch, input_mask_batch, input_segment_batch) in enumerate(batch_train):
-            feed_dict = {model.inputs_seq: inputs_seq_batch, model.label: label_batch,
-                         model.inputs_mask: input_mask_batch, model.inputs_segment: input_segment_batch}
+        batch_test = batch_iter(seq_id_test, label_test, input_mask_test, input_segment_test, args.batch_size)
+        for i, (inputs_seq_batch, label_batch, inputs_mask_batch, inputs_segment_batch) in enumerate(batch_test):
+            feed_dict = {model.inputs_seq: inputs_seq_batch, model.inputs_mask: inputs_mask_batch,
+                         model.inputs_segment: inputs_segment_batch}
             predict_label_prob_batch = session.run(model.probabilities, feed_dict=feed_dict)
-            for i in range(len(predict_label_prob_batch)):
-                predict_label.append([i for i, prob in enumerate(predict_label_prob_batch[i]) if prob > 0.5])
-                real_label.append([i for i, prob in enumerate(label_batch[i]) if prob == 1])
+            for j in range(len(predict_label_prob_batch)):
+                predict_label.append([i for i, prob in enumerate(predict_label_prob_batch[j]) if prob > 0.5])
+                real_label.append([i for i, prob in enumerate(label_batch[j]) if prob == 1])
 
-            for predict_label_, real_label_ in zip(predict_label, real_label):
-                p_sum += len(predict_label_)
-                r_sum += len(real_label_)
-                for label in predict_label_:
-                    if label in real_label_:
-                        hits += 1
+        for predict_label_, real_label_ in zip(predict_label, real_label):
+            p_sum += len(predict_label_)
+            r_sum += len(real_label_)
+            for label in predict_label_:
+                if label in real_label_:
+                    hits += 1
         p = hits * 100 / p_sum if p_sum != 0 else 0
         r = hits * 100 / r_sum if r_sum != 0 else 0
         f1 = (2 * p * r) / (p + r) if p + r > 0 else 0

@@ -224,6 +224,8 @@ class BertModel(object):
       with tf.variable_scope("pooler"):
         # We "pool" the model by simply taking the hidden state corresponding
         # to the first token. We assume that this has been pre-trained
+        # 这里取第一个元素作为句向量，也就是CLS，维度是[batch_size, 1, hidden_size]，然后通过squeeze去掉第二维，
+        # 取到向量后走一个全连接，得到的维度还是[batch_size, hidden_size]
         first_token_tensor = tf.squeeze(self.sequence_output[:, 0:1, :], axis=1)
         self.pooled_output = tf.layers.dense(
             first_token_tensor,
@@ -399,7 +401,7 @@ def embedding_lookup(input_ids,
     float Tensor of shape [batch_size, seq_length, embedding_size].
   """
   # This function assumes that the input is of shape [batch_size, seq_length,
-  # num_inputs].
+  # num_inputs]. 如果输入是二维的，那么扩展一个维度
   #
   # If the input is a 2D tensor of shape [batch_size, seq_length], we
   # reshape to [batch_size, seq_length, 1].
@@ -411,31 +413,37 @@ def embedding_lookup(input_ids,
       shape=[vocab_size, embedding_size],
       initializer=create_initializer(initializer_range))
 
-  flat_input_ids = tf.reshape(input_ids, [-1])
+  flat_input_ids = tf.reshape(input_ids, [-1]) # reshape到一个维度里，[batch_size*seq_length*input_num]
   if use_one_hot_embeddings:
     one_hot_input_ids = tf.one_hot(flat_input_ids, depth=vocab_size)
     output = tf.matmul(one_hot_input_ids, embedding_table)
-  else:
+  else: # 按索引取值
     output = tf.gather(embedding_table, flat_input_ids)
 
   input_shape = get_shape_list(input_ids)
 
+  # output:[batch_size, seq_length, num_inputs]
+  # input_shape[0:-1] = [batch_size, seq_length]
+  # input_shape[-1] = num_inputs
+  # 所以reshape完output为[batch_size, seq_length, num_inputs*embedding_size]
   output = tf.reshape(output,
                       input_shape[0:-1] + [input_shape[-1] * embedding_size])
   return (output, embedding_table)
 
 
-def embedding_postprocessor(input_tensor,
+def embedding_postprocessor(input_tensor,  # [batch_size, seq_length, embedding_size]
                             use_token_type=False,
                             token_type_ids=None,
-                            token_type_vocab_size=16,
+                            token_type_vocab_size=16, # 一般是2
                             token_type_embedding_name="token_type_embeddings",
                             use_position_embeddings=True,
                             position_embedding_name="position_embeddings",
                             initializer_range=0.02,
-                            max_position_embeddings=512,
+                            max_position_embeddings=512, # 最大位置编码，必须大于max_seq_len
                             dropout_prob=0.1):
   """Performs various post-processing on a word embedding tensor.
+  input_tensor是token_embedding，这部分代码生成了segment embedding和position embedding，
+  并将这些embedding相加进行正则化和dropout.
 
   Args:
     input_tensor: float Tensor of shape [batch_size, seq_length,
@@ -486,6 +494,8 @@ def embedding_postprocessor(input_tensor,
                                        [batch_size, seq_length, width])
     output += token_type_embeddings
 
+  # 这里没有使用Transformer中的sin/cos函数去生成position embedding，而是随机初始化了，可以训练的，
+  # 原因是作者认为Bert的训练数据比较大，完全可以让模型自己去学习
   if use_position_embeddings:
     assert_op = tf.assert_less_equal(seq_length, max_position_embeddings)
     with tf.control_dependencies([assert_op]):
@@ -502,6 +512,9 @@ def embedding_postprocessor(input_tensor,
       # for position [0, 1, 2, ..., max_position_embeddings-1], and the current
       # sequence has positions [0, 1, 2, ... seq_length-1], so we can just
       # perform a slice.
+      #
+      # 这里position embedding初始化是[max_position_embeddings, width]，
+      # 但是通常实际输入的序列并没有达到max_position_embeddings，所以为了提高训练速度使用tf.slice取出句子长度的embedding
       position_embeddings = tf.slice(full_position_embeddings, [0, 0],
                                      [seq_length, -1])
       num_dims = len(output.shape.as_list())
@@ -509,6 +522,11 @@ def embedding_postprocessor(input_tensor,
       # Only the last two dimensions are relevant (`seq_length` and `width`), so
       # we broadcast among the first dimensions, which is typically just
       # the batch size.
+      #
+      # position embedding跟输入的内容无关，所以他的shape总是[seq_length, width]
+      # 这样embedding就无法相加了，所以我们需要将position embedding扩充维度，
+      # 我们在batch_size维度扩充维度1，最终为[1, seq_length, width]
+      # 然后就可以通过broadcast加上去了。broadcast机制就是维度不同的tensor相加，维度少的会扩充维度到维度多的tensor上去加。
       position_broadcast_shape = []
       for _ in range(num_dims - 2):
         position_broadcast_shape.append(1)
@@ -523,6 +541,8 @@ def embedding_postprocessor(input_tensor,
 
 def create_attention_mask_from_input_mask(from_tensor, to_mask):
   """Create 3D attention mask from a 2D tensor mask.
+  因为每个样本都要进行padding操作，所以在做self-attention的时候padding的部分不能进行attention，
+  这就需要构造一个attention_mask矩阵去标记出来哪些是padding的部分
 
   Args:
     from_tensor: 2D or 3D Tensor of shape [batch_size, from_seq_length, ...].
@@ -698,17 +718,19 @@ def attention_layer(from_tensor,
   # Take the dot product between "query" and "key" to get the raw
   # attention scores.
   # `attention_scores` = [B, N, F, T]
+  # 点积，然后进行缩放
   attention_scores = tf.matmul(query_layer, key_layer, transpose_b=True)
   attention_scores = tf.multiply(attention_scores,
                                  1.0 / math.sqrt(float(size_per_head)))
 
   if attention_mask is not None:
-    # `attention_mask` = [B, 1, F, T]
+    # `attention_mask` = [B, 1, F, T] 扩充维度
     attention_mask = tf.expand_dims(attention_mask, axis=[1])
 
     # Since attention_mask is 1.0 for positions we want to attend and 0.0 for
     # masked positions, this operation will create a tensor which is 0.0 for
     # positions we want to attend and -10000.0 for masked positions.
+    # 如果attention_mask中的值是1，那么adder得到的值就是0，如果值是0，那么得到的值就是-10000，也可以理解为负无穷。
     adder = (1.0 - tf.cast(attention_mask, tf.float32)) * -10000.0
 
     # Since we are adding it to the raw scores before the softmax, this is
@@ -804,6 +826,7 @@ def transformer_model(input_tensor,
         "The hidden size (%d) is not a multiple of the number of attention "
         "heads (%d)" % (hidden_size, num_attention_heads))
 
+  # 多头注意力是将hidden_size根据头的个数进行切分的，得出来的就是每个头的维度
   attention_head_size = int(hidden_size / num_attention_heads)
   input_shape = get_shape_list(input_tensor, expected_rank=3)
   batch_size = input_shape[0]
@@ -812,6 +835,7 @@ def transformer_model(input_tensor,
 
   # The Transformer performs sum residuals on all layers so the input needs
   # to be the same as the hidden size.
+  # 因为encoder中有残差连接，所以需要保证shape一样。
   if input_width != hidden_size:
     raise ValueError("The width of the input tensor (%d) != hidden size (%d)" %
                      (input_width, hidden_size))
@@ -844,6 +868,8 @@ def transformer_model(input_tensor,
               to_seq_length=seq_length)
           attention_heads.append(attention_head)
 
+        # attention_layer()返回的已经是多头注意力了，所以attention_heads大概率是只有一个元素的。
+        # 如果不是那么就是下边官方解释的了，会有其他的sequence，concat起来就完事儿，具体为啥咱也不知道。
         attention_output = None
         if len(attention_heads) == 1:
           attention_output = attention_heads[0]
